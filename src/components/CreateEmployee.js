@@ -23,7 +23,7 @@ class CreateEmloyee extends Component {
         {console.log(this.props.employee)}
         return (
             <View>
-                <EmployeeForm />
+                <EmployeeForm {...this.props} />
                 {this.showButton()}
                 <Text>{this.props.error}</Text>
             </View>

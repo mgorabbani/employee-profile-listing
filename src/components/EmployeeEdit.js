@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Text, View, Modal, TouchableHighlight } from 'react-native';
+import { Button, Text, View, Modal, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { employeeUpdate, employeSave } from '../actions/EmployeeActions'
 import EmployeeForm from './EmployeeForm'
@@ -42,24 +42,24 @@ class EmployeeEdit extends Component {
                     visible={this.state.modalVisible}
                     onRequestClose={() => { alert("Modal has been closed.") }}
                 >
-                    <View style={{ height: 30, flex: .3, alignItems: 'center', justifyContent: 'center', backgroundColor: "#fff" }}>
-                        <View>
-                            <Text>Are you sure you want to fire {this.props.name}?</Text>
-
-                            <View style={{flex:1}} >
-                                <TouchableHighlight onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible)
-                                }}>
-                                    <Text>Yes</Text>
-                                </TouchableHighlight>
-                                <TouchableHighlight onPress={() => {
-                                    this.setModalVisible(!this.state.modalVisible)
-                                }}>
-                                    <Text>No</Text>
-                                </TouchableHighlight>
+                    <View style={{  alignItems: 'center', justifyContent:'center', flex: 1 }}>
+                            <View style={{ backgroundColor:'white',height:120,padding:20,borderRadius:15,shadowColor:'#000',shadowOpacity:.5,shadowOffset:{width:1,height:1} }}>
+                                <Text>Are you sure you want to fire {this.props.name}?</Text>
+                                <View  style={{ justifyContent: 'space-around', alignItems: 'center', flex: 1,flexDirection:'row' }}>
+                                    <TouchableOpacity style={{padding:5,paddingHorizontal:20,borderColor:"blue",borderWidth:1,borderRadius:5}} onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible)
+                                    }}>
+                                        <Text>Yes</Text>
+                                    </TouchableOpacity >
+                                    <TouchableOpacity 
+                                    style={{padding:5,paddingHorizontal:20,borderColor:"blue",borderWidth:1,borderRadius:5}}
+                                    onPress={() => {
+                                        this.setModalVisible(!this.state.modalVisible)
+                                    }}>
+                                        <Text>No</Text>
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-
-                        </View>
                     </View>
                 </Modal>
             </View>

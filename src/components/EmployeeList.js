@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 
-import {  ListView } from 'react-native';
+import {  ListView ,View, Button} from 'react-native';
 import { connect } from 'react-redux'
-import { employeesFetch } from '../actions/EmployeeActions'
+import { employeesFetch,employeeSignOut } from '../actions/EmployeeActions'
 import _ from 'lodash';
 import ListItem from './ListItem'
 const a = ["a","b"]
@@ -29,7 +29,13 @@ class EmployeeList extends Component {
     }
     render() {
         return (
-               <ListView enableEmptySections dataSource={this.dataSource} renderRow={this.renderRow}/>
+            <View style={{justifyContent:'space-between',flex:1}} >
+                 <ListView style={{flex:.9}} enableEmptySections dataSource={this.dataSource} renderRow={this.renderRow}/>
+                 <View style={{justifyContent:'flex-end',flex:.1,backgroundColor:'green',paddingBottom:10}} >
+                    <Button title=" Sign Out" color="#fff" onPress={()=>this.props.employeeSignOut()}/>
+                </View> 
+            </View>
+              
         )
     }
     renderRow(employee){
@@ -44,4 +50,4 @@ const mapStateToProps = state => {
     const {loading} = state
     return {employees, loading}
 }
-export default connect(mapStateToProps, { employeesFetch })(EmployeeList)
+export default connect(mapStateToProps, { employeesFetch,employeeSignOut })(EmployeeList)

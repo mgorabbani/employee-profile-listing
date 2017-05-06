@@ -30,8 +30,8 @@ export const employeeCreate = (name, phone, shift) => {
                 dispatch({
                     type: EMPLOYEE_CREATE_DONE
                 })
-                Actions.employeeList( {type:'reset'})
-            }).catch(()=>{
+                Actions.employeeList({ type: 'reset' })
+            }).catch(() => {
                 dispatch({
                     type: EMPLOYEE_CREATE_FAILED
                 })
@@ -39,29 +39,48 @@ export const employeeCreate = (name, phone, shift) => {
     }
 }
 
-export const employeesFetch = ()=> {
-     const { currentUser } = firebase.auth()
+export const employeesFetch = () => {
+    const { currentUser } = firebase.auth()
     return (dispatch) => {
         firebase.database().ref(`/users/${currentUser.uid}/employees`)
-        .on('value', snapshot => {
-            dispatch({
-                type: EMPLOYEE_FETCH_SUCCESS,
-                payload: snapshot.val()
+            .on('value', snapshot => {
+                dispatch({
+                    type: EMPLOYEE_FETCH_SUCCESS,
+                    payload: snapshot.val()
+                })
             })
-        })
     }
 }
 
-export const employeSave = ({name, phone, shift, uid})=> {
+export const employeSave = ({ name, phone, shift, uid }) => {
     const { currentUser } = firebase.auth()
     return (dispatch) => {
 
-     firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
-     .set({ name, phone, shift })
-     .then(()=> {
-         dispatch({type:EMPLOYEE_SAVE_SUCCESS})
-         Actions.employeeList({type:'reset'})
-         
-     })
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .set({ name, phone, shift })
+            .then(() => {
+                dispatch({ type: EMPLOYEE_SAVE_SUCCESS })
+                Actions.employeeList({ type: 'reset' })
+
+            })
+    }
+}
+
+export const employeeFire = (uid) => {
+    const { currentUser } = firebase.auth()
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .remove().then(() => {
+                Actions.employeeList({ type: 'reset' })
+            })
+    }
+
+}
+
+export const employeeSignOut = () => {
+    return (dispatch) => {
+        firebase.auth().signOut().then(()=>{
+            Actions.auth({ type: 'reset' })
+        })
     }
 }

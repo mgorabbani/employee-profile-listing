@@ -23,8 +23,7 @@ class CreateEmloyee extends Component {
         {console.log(this.props.employee)}
         return (
             <View>
-                <Text>Create Employee</Text>
-                <EmployeeForm {...this.props} />
+                <EmployeeForm />
                 {this.showButton()}
                 <Text>{this.props.error}</Text>
             </View>
@@ -33,6 +32,7 @@ class CreateEmloyee extends Component {
 }
 
 const mapStateToProps = state => {
+    console.log(state)
     const { name, phone, shift, loading, error } = state.employeeForm;
     return { name, phone, shift, loading, error };
 }

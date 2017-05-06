@@ -32,7 +32,7 @@ class EmployeeEdit extends Component {
     render() {
         return (
             <View>
-                <EmployeeForm />
+                 <EmployeeForm {...this.props} />
                 <Button title="Save Changes" onPress={this.onButtonPress.bind(this)} />
                 <Button title="Message Employee" onPress={this.onTextPress.bind(this)} />
                 <Button title="Fire" onPress={this.onFirePress.bind(this)} />

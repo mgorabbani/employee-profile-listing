@@ -47,7 +47,7 @@ class RouterComponent extends Component {
                         key="employeeList"
                         component={EmployeeList}
                         title="Employee List" />
-                    <Scene key="createEmployee" component={CreateEmployee} title="Creaet Employee" />
+                    <Scene key="createEmployee" component={CreateEmployee} title="Add Employee" />
                     <Scene key="employeeEdit" component={EmployeeEdit} title="Edit Employee" />
                 </Scene>
             </Router>
